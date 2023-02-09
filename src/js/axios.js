@@ -1,0 +1,58 @@
+import axios from 'axios';
+import { refs } from './DOM';
+
+const KEY_API = '1256f1c895c40ff76f99ba50b7102dca'; // Ключ тім ліда
+const BASE_URL = 'https://api.themoviedb.org/3';
+
+// Пошук по назві
+export async function getAxiosSearchFilms(query, page) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/search/movie?api_key=${KEY_API}&page=${page}&language=en-US&query=${query}&include_adult=false`
+    );
+    const data = response.data;
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//---------ДОПИСУЄМО СВОЇ КЛЮЧІ І ФУНКЦІЇ СЮДИ!---------//
+
+// Популярні
+
+export async function getAxiosPopularFilms(page = 1) {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=2a9019ab3cb7c560ad73000751e89f97&page=${page}&language=en-US&include_adult=false`
+    );
+    const data = response.data;
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Детальна інфа
+export async function getMovieByID(movieId) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${movieId}?api_key=${KEY_API}&language=en-US`
+    );
+    return response.data;
+  } catch (err) {
+    console.log('there is no such ID');
+  }
+}
+
+// Чи є на ютубі трейлер
+export async function getMovieTrailerByID(movieId) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${movieId}/videos?api_key=${KEY_API}&language=en-US`
+    );
+    return response.data;
+  } catch (err) {
+    console.log('there is no such ID');
+  }
+}
