@@ -21,3 +21,10 @@ import './js/add-to-queue';
 import './js/main-anim';
 
 import './js/genres-search/search-genres-func';
+
+
+
+
+
+
+
